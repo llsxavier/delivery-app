@@ -1,0 +1,32 @@
+{
+  "name": "delivery-app",
+  "version": "1.0.0",
+  "description": "App that shows all my skills developed in the past year. JavaScript - Front/Back-end, MySql, MongoDB, SocketIO.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run install-back && npm run install-front && npm run start-back && npm run start-front",
+    "install-back": "npm --prefix back-end/ install",
+    "start-back": "npm --prefix back-end/ run start&",
+    "install-front": "npm --prefix front-end/ install",
+    "start-front": "npm --prefix front-end/ run start&",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/llsxavier/DeliveryApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/llsxavier/DeliveryApp/issues"
+  },
+  "homepage": "https://github.com/llsxavier/DeliveryApp#readme",
+  "dependencies": {
+    "@mysql/xdevapi": "^8.0.20",
+    "mysql2": "^2.1.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
