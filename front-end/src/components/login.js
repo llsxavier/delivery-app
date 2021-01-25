@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { login } from '../services/api';
 
 const Login = () => {
   const history = useHistory();
@@ -18,13 +19,17 @@ const Login = () => {
     }
   }, [mail, pass]);
 
-  const signIn = () => {
-    history.push('/products');
+  const signIn = async () => {
+    const result = await login(mail, pass);
+    return result;
+    // history.push('/products');
   };
 
   const signUp = () => {
     history.push('/register')
   }
+
+
 
   return (
     <form>
