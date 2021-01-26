@@ -1,5 +1,6 @@
 require('dotenv/config');
 const jwt = require('jsonwebtoken');
+const userModel = require('../models/userModel');
 
 const secret = process.env.MADONNA;
 

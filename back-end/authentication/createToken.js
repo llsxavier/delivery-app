@@ -6,7 +6,7 @@ const secret = process.env.MADONNA;
 const createNewJwt = (payload) => {
   const jwtConfig = {
     expiresIn: '30m',
-    algorithn: 'HS256',
+    algorithm: 'HS256',
   };
 
   const token = jwt.sign(payload, secret, jwtConfig);
