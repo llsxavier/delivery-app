@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS Trybeer;
-CREATE DATABASE IF NOT EXISTS Trybeer;
+DROP DATABASE IF EXISTS DeliveryApp;
+CREATE DATABASE IF NOT EXISTS DeliveryApp;
 
-USE Trybeer;
+USE DeliveryApp;
 
 CREATE TABLE IF NOT EXISTS users (
 	id INT NOT NULL AUTO_INCREMENT,
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS sales_products (
 );
 
 INSERT INTO users (id, name, email, password, role) VALUES
-    ('1', 'Tryber Admin', 'tryber@trybe.com.br', '123456', 'administrator'),
+    ('1', 'Admin', 'admin@deliveryapp.com.br', '123456', 'administrator'),
     ('2', 'testuser', 'user@test.com', 'test123', 'client');
 
 INSERT INTO products (id, name, price, url_image) VALUES
