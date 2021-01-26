@@ -43,8 +43,8 @@ const Login = () => {
       <label htmlFor="email">
         Email
         <input
-          name="email"
-          type="text"
+          id="email"
+          type="email"
           placeholder="Digite o email"
           onChange={(e) => setMail(e.target.value)}
         />
@@ -52,8 +52,8 @@ const Login = () => {
       <label htmlFor="password">
         Senha
         <input
-          name="password"
-          type="number"
+          id="password"
+          type="password"
           placeholder="Digite a senha"
           onChange={(e) => setPass(e.target.value)}
         />
