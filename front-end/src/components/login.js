@@ -22,7 +22,14 @@ const Login = () => {
   const signIn = async () => {
     const result = await login(email, pass);
     if (result.data.err) {
-      alert(result.data.err);
+      if (document.querySelector('span')) {
+        document.querySelector('span').remove();
+      }
+      const form = document.querySelector('form');
+      const span = document.createElement('span');
+      span.setAttribute('data-testid', 'errorMsg');
+      span.innerText = result.data.err;
+      form.appendChild(span);
     } else {
       if (result.data.user.role === 'client') {
         localStorage.setItem('token', JSON.stringify(result.data.token));
