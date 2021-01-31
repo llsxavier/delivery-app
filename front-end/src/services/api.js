@@ -5,10 +5,12 @@ const api = axios.create({
 });
 
 const login = async (email, password) => {
-  const result = await api.post('/login', { email, password });
-  return result;
+  try {
+    const result = await api.post('/login', { email, password });
+    return result.data;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
-export {
-  login,
-};
+export { login };

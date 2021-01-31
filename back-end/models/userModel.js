@@ -17,7 +17,7 @@ const searchUserByEmail = async (email) => {
         })
     )
     .catch((err) => {
-      console.err(err);
+      console.error(err);
     });
   return result;
 };

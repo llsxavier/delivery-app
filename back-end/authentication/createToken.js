@@ -4,14 +4,18 @@ const jwt = require('jsonwebtoken');
 const secret = process.env.MADONNA;
 
 const createNewJwt = (payload) => {
-  const jwtConfig = {
-    expiresIn: '30m',
-    algorithm: 'HS256',
-  };
+  try {
+    const jwtConfig = {
+      expiresIn: '30m',
+      algorithm: 'HS256',
+    };
 
-  const token = jwt.sign(payload, secret, jwtConfig);
+    const token = jwt.sign(payload, secret, jwtConfig);
 
-  return token;
+    return token;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 module.exports = createNewJwt;
