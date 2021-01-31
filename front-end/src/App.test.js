@@ -4,7 +4,7 @@ import {
   fireEvent,
   waitFor,
 } from '@testing-library/react';
-import Login from './components/login';
+import Login from './pages/Login';
 import renderWithRouter from './renderWithRouter';
 
 const clientData = {
@@ -50,7 +50,7 @@ describe('Login Page', () => {
     const { getByText } = renderWithRouter(<Login />);
     const signUpBtn = getByText(/Sign up/i);
     expect(signUpBtn).toBeInTheDocument();
-    expect(signUpBtn.textContent).toBe('Ainda não tenho conta! (Sign up)');
+    expect(signUpBtn.textContent).toBe('Não tenho conta! (Sign up)');
   });
 
   it('Client is able to login', async () => {

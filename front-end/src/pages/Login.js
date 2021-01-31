@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { login } from '../services/api';
+import '../assets/css/login/style.css';
+import loginIMG from '../assets/images/login.jpg';
 
 const Login = () => {
   const history = useHistory();
@@ -8,18 +10,21 @@ const Login = () => {
   const [email, setMail] = useState('');
   const [pass, setPass] = useState(0);
   const [disabled, setDisabled] = useState(true);
+  const [cssRule, setCssRule] = useState('false');
 
   useEffect(() => {
     if (!email || !pass) {
       setDisabled(true);
+      setCssRule('false');
     } else {
       setDisabled(false);
+      setCssRule('true');
     }
   }, [email, pass]);
 
   const signIn = async (e) => {
     e.preventDefault();
-    const form = document.querySelector('form');
+    const fieldset = document.querySelector('fieldset');
     const span = document.createElement('span');
     span.setAttribute('data-testid', 'errorMsg');
     try {
@@ -32,13 +37,13 @@ const Login = () => {
           document.querySelector('span').remove();
         }
         span.innerText = result.err;
-        form.appendChild(span);
+        fieldset.appendChild(span);
       } else {
         if (result.data.role === 'client') {
           localStorage.setItem('token', JSON.stringify(result.data.token));
           history.push('/products');
         } else {
-          localStorage.setItem('token', JSON.stringify(result.data.token));
+          localStorage.setItem('token', JSON.stringify(result.token));
           history.push('/admin/orders');
         }
       }
@@ -47,7 +52,7 @@ const Login = () => {
         document.querySelector('span').remove();
       }
       span.innerText = e;
-      form.appendChild(span);
+      fieldset.appendChild(span);
     }
   };
 
@@ -69,6 +74,11 @@ const Login = () => {
 
   return (
     <form method="POST" onSubmit={(e) => signIn(e)}>
+      <img
+        id="loginIMG"
+        src={loginIMG}
+        alt="user fingering with 'push' text on it"
+      ></img>
       <fieldset>
         <legend>Login</legend>
         <label htmlFor="email">
@@ -107,11 +117,11 @@ const Login = () => {
             onClick={() => showPass()}
           />
         </label>
-        <button type="submit" disabled={disabled}>
+        <button type="submit" className={cssRule} disabled={disabled}>
           Sign in
         </button>
-        <button type="button" onClick={() => signUp()}>
-          Ainda não tenho conta! (Sign up)
+        <button type="button" className="true" onClick={() => signUp()}>
+          Não tenho conta! (Sign up)
         </button>
       </fieldset>
     </form>
