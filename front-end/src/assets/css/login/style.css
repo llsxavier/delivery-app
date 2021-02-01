@@ -17,11 +17,13 @@ form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 5% auto;
-  padding-right: 20px;
+  padding-right: 1%;
   width: 50%;
 }
 
 #loginIMG {
+  border-style: hidden;
+  height: 100%;
   width: 100%;
 }
 
@@ -30,7 +32,7 @@ fieldset {
   border-radius: 10px;
   box-shadow: 5px 5px 5px 5px #335353;
   margin: auto;
-  padding: 30px;
+  padding: 3%;
 }
 
 fieldset legend {
@@ -40,11 +42,11 @@ fieldset legend {
   box-shadow: 2px 2px 2px 2px #333535;
   font-size: 15px;
   font-weight: bold;
-  padding: 10px;
+  padding: 2%;
 }
 
 input {
-  padding: 10px;
+  padding: 4%;
   text-align: center;
   width: 100%;
 }
@@ -66,8 +68,8 @@ button.true {
   border-radius: 8px;
   color: #3f51b5;
   font-weight: bold;
-  margin-top: 20px;
-  padding: 5px 10px;
+  margin-top: 6%;
+  padding: 2% 4%;
   text-align: center;
   width: 100%;
 }
@@ -76,17 +78,22 @@ button.false {
   background: none;
   border-radius: 8px;
   font-weight: bold;
-  margin-top: 20px;
-  padding: 5px 10px;
+  margin-top: 7%;
+  padding: 2% 4%;
   text-align: center;
   width: 100%;
 }
 
-img {
-  border-style: hidden;
-}
-
 span {
   color: red;
-  padding-left: 50px;
+  padding-left: 5%;
+}
+
+@media (max-width: 768px) {
+  #loginIMG {
+    display: none;
+  }
+  form {
+    grid-template-columns: 1fr;
+  }
 }
