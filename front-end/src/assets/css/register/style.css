@@ -26,6 +26,14 @@
   width: 100%;
 }
 
-form {
+form.register {
   background: #e7e7e9;
+  border: 1em solid #5e6f8d;
+  border-radius: 1%;
+  box-shadow: 5px 5px 5px 5px #335353;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 5% auto;
+  padding-right: 1%;
+  width: 50%;
 }

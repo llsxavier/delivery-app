@@ -72,7 +72,7 @@ const Login = () => {
   };
 
   return (
-    <form method="POST" onSubmit={(e) => signIn(e)}>
+    <form method="POST" className="login" onSubmit={(e) => signIn(e)}>
       <img
         id="loginIMG"
         src={loginIMG}

@@ -58,7 +58,7 @@ const Register = () => {
   }
 
   return (
-    <form method="POST" onSubmit={(e) => register(e)}>
+    <form method="POST" className="register" onSubmit={(e) => register(e)}>
       <img
         id={imgOpacity}
         src={registerIMG}
