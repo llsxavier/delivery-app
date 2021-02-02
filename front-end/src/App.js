@@ -3,15 +3,13 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
 import Login from './pages/Login';
 
-const App = () => {
-  return (
+const App = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={ Login } />
-      <Route path="/login" component={ Login } />
+      <Route exact path="/" component={Login} />
+      <Route path="/login" component={Login} />
     </Switch>
   </BrowserRouter>
-  )
-};
+);
 
 export default App;

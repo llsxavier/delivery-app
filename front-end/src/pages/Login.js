@@ -29,6 +29,7 @@ const Login = () => {
     span.setAttribute('data-testid', 'errorMsg');
     try {
       const result = await login(email, pass);
+      console.log(result)
       if (!result) {
         throw new Error('Servidor indisponível. Tente novamente mais tarde!');
       }
@@ -38,14 +39,12 @@ const Login = () => {
         }
         span.innerText = result.err;
         fieldset.appendChild(span);
+      } else if (result.data.role === 'client') {
+        localStorage.setItem('token', JSON.stringify(result.data.token));
+        history.push('/products');
       } else {
-        if (result.data.role === 'client') {
-          localStorage.setItem('token', JSON.stringify(result.data.token));
-          history.push('/products');
-        } else {
-          localStorage.setItem('token', JSON.stringify(result.token));
-          history.push('/admin/orders');
-        }
+        localStorage.setItem('token', JSON.stringify(result.token));
+        history.push('/admin/orders');
       }
     } catch (e) {
       if (document.querySelector('span')) {
@@ -78,7 +77,7 @@ const Login = () => {
         id="loginIMG"
         src={loginIMG}
         alt="user fingering with 'push' text on it"
-      ></img>
+      />
       <fieldset>
         <legend>Login</legend>
         <label htmlFor="email">

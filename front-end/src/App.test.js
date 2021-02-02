@@ -1,17 +1,14 @@
 import React from 'react';
-import {
-  cleanup,
-  fireEvent,
-  waitFor,
-} from '@testing-library/react';
+import { cleanup, fireEvent, waitFor } from '@testing-library/react';
 import Login from './pages/Login';
 import renderWithRouter from './renderWithRouter';
 
-const clientData = {
+const client = {
   email: 'user@test.com',
   pass: '123456',
 };
-const adminData = {
+
+const admin = {
   email: 'admin@deliveryapp.com.br',
   pass: '123456',
 };
@@ -59,10 +56,10 @@ describe('Login Page', () => {
     const passInput = getByLabelText('Senha');
     const signInBtn = getByText('Sign in');
 
-    fireEvent.change(emailInput, { target: { value: clientData.email } });
-    expect(emailInput).toHaveValue(clientData.email);
-    fireEvent.change(passInput, { target: { value: clientData.pass } });
-    expect(passInput).toHaveValue(clientData.pass);
+    fireEvent.change(emailInput, { target: { value: client.email } });
+    expect(emailInput).toHaveValue(client.email);
+    fireEvent.change(passInput, { target: { value: client.pass } });
+    expect(passInput).toHaveValue(client.pass);
 
     fireEvent.click(signInBtn);
 
@@ -78,10 +75,10 @@ describe('Login Page', () => {
     const passInput = getByLabelText('Senha');
     const signInBtn = getByText('Sign in');
 
-    fireEvent.change(emailInput, { target: { value: adminData.email } });
-    expect(emailInput).toHaveValue(adminData.email);
-    fireEvent.change(passInput, { target: { value: adminData.pass } });
-    expect(passInput).toHaveValue(adminData.pass);
+    fireEvent.change(emailInput, { target: { value: admin.email } });
+    expect(emailInput).toHaveValue(admin.email);
+    fireEvent.change(passInput, { target: { value: admin.pass } });
+    expect(passInput).toHaveValue(admin.pass);
 
     fireEvent.click(signInBtn);
 
