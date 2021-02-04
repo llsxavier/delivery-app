@@ -52,9 +52,32 @@ const Register = () => {
     }
   };
 
+  const newPass = () => {
+    history.push('/getNewPassword');
+  };
+
   function register(e) {
     e.preventDefault();
-    console.log(name, lastname, email, password, role);
+    const fieldset = document.querySelector('fieldset');
+    let span = document.querySelector('#registeredUser');
+    let passBTN = document.querySelector('#passBTN');
+    if (span) {
+      document.querySelector('#registeredUser').remove();
+      document.querySelector('#passBTN').remove();
+    }
+    span = document.createElement('span');
+    span.setAttribute('id', 'registeredUser');
+    span.innerText = 'E-mail já está cadastrado!';
+    passBTN = document.createElement('button');
+    passBTN.setAttribute('id', 'passBTN');
+    passBTN.setAttribute('class', 'spam');
+    passBTN.setAttribute('type', 'button');
+    passBTN.addEventListener('click', function () {
+      newPass();
+    });
+    passBTN.innerText = 'Fazer alteração de senha';
+    fieldset.appendChild(span);
+    fieldset.appendChild(passBTN);
   }
 
   return (

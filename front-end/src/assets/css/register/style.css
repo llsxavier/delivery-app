@@ -37,3 +37,15 @@ form.register {
   padding-right: 1%;
   width: 50%;
 }
+
+button.spam {
+  background: none;
+  border: 1px solid black;
+  border-radius: 8px;
+  color: #3f51b5;
+  font-weight: bold;
+  margin-top: 6%;
+  padding: 2% 4%;
+  text-align: center;
+  width: 100%;
+}

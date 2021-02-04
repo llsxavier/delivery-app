@@ -29,7 +29,6 @@ const Login = () => {
     span.setAttribute('data-testid', 'errorMsg');
     try {
       const result = await login(email, pass);
-      console.log(result)
       if (!result) {
         throw new Error('Servidor indisponível. Tente novamente mais tarde!');
       }
@@ -69,6 +68,10 @@ const Login = () => {
 
   const signUp = () => {
     history.push('/register');
+  };
+
+  const newPass = () => {
+    history.push('/getNewPassword');
   };
 
   return (
@@ -121,6 +124,9 @@ const Login = () => {
         </button>
         <button type="button" className="true" onClick={() => signUp()}>
           Não tenho conta! (Sign up)
+        </button>
+        <button type="button" className="true" onClick={() => newPass()}>
+          Esqueci a senha. XD
         </button>
       </fieldset>
     </form>
