@@ -39,10 +39,12 @@ const Login = () => {
         span.innerText = result.err;
         fieldset.appendChild(span);
       } else if (result.data.role === 'client') {
-        localStorage.setItem('token', JSON.stringify(result.data.token));
+        localStorage.setItem('token', JSON.stringify(result.token));
+        localStorage.setItem('user', JSON.stringify(result.data.name));
         history.push('/products');
       } else {
         localStorage.setItem('token', JSON.stringify(result.token));
+        localStorage.setItem('user', JSON.stringify(result.data.name));
         history.push('/admin/orders');
       }
     } catch (e) {

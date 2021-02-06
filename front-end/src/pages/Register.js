@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import registerIMG from '../assets/images/register.jpg';
+import { register } from '../services/api';
 import '../assets/css/register/style.css';
 
 const Register = () => {
@@ -56,32 +57,54 @@ const Register = () => {
     history.push('/getNewPassword');
   };
 
-  function register(e) {
-    e.preventDefault();
+  const registering = async (e) => {
     const fieldset = document.querySelector('fieldset');
     let span = document.querySelector('#registeredUser');
     let passBTN = document.querySelector('#passBTN');
-    if (span) {
-      document.querySelector('#registeredUser').remove();
-      document.querySelector('#passBTN').remove();
+    e.preventDefault();
+    try {
+      const result = await register(name, lastname, email, password, role);
+      if (!result) {
+        throw new Error('Servidor indisponível. Tente novamente mais tarde!');
+      }
+      if (result.err) {
+        if (span) {
+          document.querySelector('#registeredUser').remove();
+          document.querySelector('#passBTN').remove();
+        }
+        span = document.createElement('span');
+        span.setAttribute('id', 'registeredUser');
+        span.innerText = result.err;
+        passBTN = document.createElement('button');
+        passBTN.setAttribute('id', 'passBTN');
+        passBTN.setAttribute('class', 'spam');
+        passBTN.setAttribute('type', 'button');
+        passBTN.addEventListener('click', function () {
+          newPass();
+        });
+        passBTN.innerText = 'Fazer alteração de senha';
+        fieldset.appendChild(span);
+        fieldset.appendChild(passBTN);
+      } else if (result.newUser.role === 'client') {
+        localStorage.setItem('token', JSON.stringify(result.token));
+        localStorage.setItem('user', JSON.stringify(result.newUser.name));
+        history.push('/products');
+      } else {
+        localStorage.setItem('token', JSON.stringify(result.token));
+        localStorage.setItem('user', JSON.stringify(result.newUser.name));
+        history.push('/admin/orders');
+      }
+    } catch (e) {
+      if (span) {
+        span.remove();
+      }
+      span.innerText = e;
+      fieldset.appendChild(span);
     }
-    span = document.createElement('span');
-    span.setAttribute('id', 'registeredUser');
-    span.innerText = 'E-mail já está cadastrado!';
-    passBTN = document.createElement('button');
-    passBTN.setAttribute('id', 'passBTN');
-    passBTN.setAttribute('class', 'spam');
-    passBTN.setAttribute('type', 'button');
-    passBTN.addEventListener('click', function () {
-      newPass();
-    });
-    passBTN.innerText = 'Fazer alteração de senha';
-    fieldset.appendChild(span);
-    fieldset.appendChild(passBTN);
-  }
+  };
 
   return (
-    <form method="POST" className="register" onSubmit={(e) => register(e)}>
+    <form method="POST" className="register" onSubmit={(e) => registering(e)}>
       <img
         id={imgOpacity}
         src={registerIMG}
