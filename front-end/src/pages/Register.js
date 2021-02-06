@@ -74,11 +74,13 @@ const Register = () => {
         }
         span = document.createElement('span');
         span.setAttribute('id', 'registeredUser');
+        span.setAttribute('data-testid', 'errorMsg');
         span.innerText = result.err;
         passBTN = document.createElement('button');
         passBTN.setAttribute('id', 'passBTN');
         passBTN.setAttribute('class', 'spam');
         passBTN.setAttribute('type', 'button');
+        passBTN.setAttribute('data-testid', 'newPass');
         passBTN.addEventListener('click', function () {
           newPass();
         });
