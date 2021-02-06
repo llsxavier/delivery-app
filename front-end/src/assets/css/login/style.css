@@ -9,7 +9,7 @@ body {
   background-color: #c6d7f5;
 }
 
-form {
+form.login {
   background-color: #c6d7f5;
   border: 1em solid #5e6f8d;
   border-radius: 1%;

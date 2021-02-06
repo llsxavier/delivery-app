@@ -1,0 +1,51 @@
+.seller {
+  width: 10%;
+}
+
+#registerIMG {
+  opacity: 25%;
+  height: 100%;
+  width: 100%;
+}
+
+#registerIMG3 {
+  opacity: 50%;
+  height: 100%;
+  width: 100%;
+}
+
+#registerIMG6 {
+  opacity: 70%;
+  height: 100%;
+  width: 100%;
+}
+
+#registerIMG10 {
+  opacity: 100%;
+  height: 100%;
+  width: 100%;
+}
+
+form.register {
+  background: #e7e7e9;
+  border: 1em solid #5e6f8d;
+  border-radius: 1%;
+  box-shadow: 5px 5px 5px 5px #335353;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 5% auto;
+  padding-right: 1%;
+  width: 50%;
+}
+
+button.spam {
+  background: none;
+  border: 1px solid black;
+  border-radius: 8px;
+  color: #3f51b5;
+  font-weight: bold;
+  margin-top: 6%;
+  padding: 2% 4%;
+  text-align: center;
+  width: 100%;
+}

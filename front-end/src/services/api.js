@@ -13,4 +13,19 @@ const login = async (email, password) => {
   }
 };
 
-export { login };
+const register = async (name, lastname, email, password, role) => {
+  try {
+    const result = await api.post('/register', {
+      name,
+      lastname,
+      email,
+      password,
+      role,
+    });
+    return result.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export { login, register };

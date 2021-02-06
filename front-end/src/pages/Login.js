@@ -29,7 +29,6 @@ const Login = () => {
     span.setAttribute('data-testid', 'errorMsg');
     try {
       const result = await login(email, pass);
-      console.log(result)
       if (!result) {
         throw new Error('Servidor indisponível. Tente novamente mais tarde!');
       }
@@ -40,10 +39,12 @@ const Login = () => {
         span.innerText = result.err;
         fieldset.appendChild(span);
       } else if (result.data.role === 'client') {
-        localStorage.setItem('token', JSON.stringify(result.data.token));
+        localStorage.setItem('token', JSON.stringify(result.token));
+        localStorage.setItem('user', JSON.stringify(result.data.name));
         history.push('/products');
       } else {
         localStorage.setItem('token', JSON.stringify(result.token));
+        localStorage.setItem('user', JSON.stringify(result.data.name));
         history.push('/admin/orders');
       }
     } catch (e) {
@@ -71,8 +72,12 @@ const Login = () => {
     history.push('/register');
   };
 
+  const newPass = () => {
+    history.push('/getNewPassword');
+  };
+
   return (
-    <form method="POST" onSubmit={(e) => signIn(e)}>
+    <form method="POST" className="login" onSubmit={(e) => signIn(e)}>
       <img
         id="loginIMG"
         src={loginIMG}
@@ -121,6 +126,9 @@ const Login = () => {
         </button>
         <button type="button" className="true" onClick={() => signUp()}>
           Não tenho conta! (Sign up)
+        </button>
+        <button type="button" className="true" onClick={() => newPass()}>
+          Esqueci a senha. XD
         </button>
       </fieldset>
     </form>
