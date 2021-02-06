@@ -12,8 +12,8 @@ const searchUserByEmail = async (email) => {
         .then((results) => results.fetchOne())
         .then((results) => {
           if (!results) return null;
-          const [id, name, email, password, role] = results;
-          return { id, name, email, password, role };
+          const [id, name, email, password, passwordResetToken, passwordResetExpires, role] = results;
+          return { id, name, email, password, passwordResetToken, passwordResetExpires, role };
         })
     )
     .catch((err) => {
@@ -36,7 +36,25 @@ const register = async (name, email, password, role) => {
     });
 };
 
+const updatePass = async (email, token, date) => {
+  await connection()
+    .then((db) =>
+      db
+        .getTable('users')
+        .update()
+        .set('passwordResetToken', token)
+        .set('passwordResetExpires', date)
+        .where('email = :emailBind')
+        .bind('emailBind', email)
+        .execute()
+    )
+    .catch((err) => {
+      throw err;
+    });
+};
+
 module.exports = {
   searchUserByEmail,
   register,
+  updatePass,
 };
