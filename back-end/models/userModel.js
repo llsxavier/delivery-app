@@ -22,6 +22,21 @@ const searchUserByEmail = async (email) => {
   return result;
 };
 
+const register = async (name, email, password, role) => {
+  await connection()
+    .then((db) =>
+      db
+        .getTable('users')
+        .insert(['name', 'email', 'password', 'role'])
+        .values([name, email, password, role])
+        .execute()
+    )
+    .catch((err) => {
+      throw err;
+    });
+};
+
 module.exports = {
   searchUserByEmail,
+  register,
 };

@@ -16,6 +16,29 @@ const login = async (req, res) => {
   }
 };
 
+const register = async (req, res) => {
+  try {
+    const { name, lastname, email, password, role } = req.body;
+    const concatenadName = `${name} ${lastname}`
+    await userModel.register(
+      concatenadName,
+      email,
+      password,
+      role
+    );
+    const newUser = await userModel.searchUserByEmail(email);
+    const token = createNewJwt(newUser);
+    delete newUser.password;
+    return res.status(200).json({ newUser, token });
+  } catch (e) {
+    console.log(e);
+    return res
+      .status(503)
+      .json({ err: 'Servidor indisponível. Tente novamente mais tarde!' });
+  }
+};
+
 module.exports = {
   login,
+  register,
 };

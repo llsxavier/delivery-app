@@ -97,9 +97,12 @@ const Register = () => {
     } catch (e) {
       if (span) {
         span.remove();
+      } else {
+        const span = document.createElement('span');
+        span.setAttribute('data-testid', 'errorMsg');
+        span.innerText = e;
+        fieldset.appendChild(span);
       }
-      span.innerText = e;
-      fieldset.appendChild(span);
     }
   };
 
