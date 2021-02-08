@@ -2,7 +2,7 @@ const userModel = require('../models/userModel');
 const createNewJwt = require('../authentication/createToken');
 const crypto = require('crypto'); // já vem com o node e gera um token aleatório;
 const moment = require('moment');
-const mailer = require('../services/modules/mailer');
+const mailer = require('../services/mailer');
 
 const login = async (req, res) => {
   try {
@@ -24,13 +24,8 @@ const login = async (req, res) => {
 const register = async (req, res) => {
   try {
     const { name, lastname, email, password, role } = req.body;
-    const concatenadName = `${name} ${lastname}`
-    await userModel.register(
-      concatenadName,
-      email,
-      password,
-      role
-    );
+    const concatenadName = `${name} ${lastname}`;
+    await userModel.register(concatenadName, email, password, role);
     const newUser = await userModel.searchUserByEmail(email);
     const token = createNewJwt(newUser);
     delete newUser.password;
@@ -47,29 +42,38 @@ const getNewPass = async (req, res) => {
   const { email } = req.body;
   try {
     const user = await userModel.searchUserByEmail(email);
-    const token = crypto.randomBytes(5).toString('hex');
+    const token = crypto.randomBytes(10).toString('hex');
     let now = new Date();
     now.setHours(now.getHours() + 1); //data de experiação do token configurada em uma hora;
     now = moment(now).format('YYYY/MM/DD HH:mm:ss');
     await userModel.updatePass(user.email, token, now);
-    mailer.sendMail({
-      to: email,
-      from: 'no-reply@deliveryapp.com',
-      template: 'mail/forgotPass',
-      context: token,
-    }, (err) => {
-      if(err)
-      return res.status(400).send({error: 'Cannot send forgot password email.'});
-      return res.status(200).send()
-    })
-
-  } catch(e) {
+    mailer.sendMail(
+      {
+        to: email,
+        from: 'no-reply@deliveryapp.com',
+        subject: 'Mudança de Senha ✔',
+        // text: 'Hello world?',
+        html: `<h1>Delivery App</h1>
+        <p>Recebemos uma solicitação de mudança de senha na sua conta.</p>
+        <p>Caso não tenha feito o pedido, basta desconsiderar essa mensagem. Mas caso <b>
+        queira alterar a senha</b> <a href=http://localhost:3000/setNewPassword/${token}>clique aqui</a>.</p>
+        <p>O link expira em <b>uma hora</b>!`,
+      },
+      (err) => {
+        if (err)
+          return res
+            .status(400)
+            .send({ error: 'Cannot send forgot password email.' });
+        return res.status(200).send();
+      }
+    );
+  } catch (e) {
     console.log(e);
     return res
-    .status(503)
-    .json({ err: 'Servidor indisponível. Tente novamente mais tarde!' });
+      .status(503)
+      .json({ err: 'Servidor indisponível. Tente novamente mais tarde!' });
   }
-}
+};
 
 module.exports = {
   login,
