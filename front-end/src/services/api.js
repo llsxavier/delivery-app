@@ -28,4 +28,15 @@ const register = async (name, lastname, email, password, role) => {
   }
 };
 
-export { login, register };
+const getNewPass = async (email) => {
+  try {
+    const result = await api.post('/getNewPassword', {
+      email,
+    });
+    return result.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export { login, register, getNewPass };

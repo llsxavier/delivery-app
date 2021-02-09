@@ -36,7 +36,7 @@ const register = async (name, email, password, role) => {
     });
 };
 
-const updatePass = async (email, token, date) => {
+const setToken = async (email, token, date) => {
   await connection()
     .then((db) =>
       db
@@ -56,5 +56,5 @@ const updatePass = async (email, token, date) => {
 module.exports = {
   searchUserByEmail,
   register,
-  updatePass,
+  setToken,
 };

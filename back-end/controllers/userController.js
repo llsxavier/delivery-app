@@ -46,7 +46,7 @@ const getNewPass = async (req, res) => {
     let now = new Date();
     now.setHours(now.getHours() + 1); //data de experiação do token configurada em uma hora;
     now = moment(now).format('YYYY/MM/DD HH:mm:ss');
-    await userModel.updatePass(user.email, token, now);
+    await userModel.setToken(user.email, token, now);
     mailer.sendMail(
       {
         to: email,
@@ -75,8 +75,13 @@ const getNewPass = async (req, res) => {
   }
 };
 
+const setNewPass = async (req, res) => {
+  const { email } = req.body;
+}
+
 module.exports = {
   login,
   register,
   getNewPass,
+  setNewPass,
 };

@@ -1,0 +1,9 @@
+form.getNewPass {
+  grid-template-columns: 1fr;
+  margin: 15% auto;
+  width: 20%;
+}
+
+span.success {
+  color: green;
+}
