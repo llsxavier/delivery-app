@@ -39,4 +39,13 @@ const getNewPass = async (email) => {
   }
 };
 
-export { login, register, getNewPass };
+const setNewPass = async (token, email, pass) => {
+  try {
+    const result = await api.post('/setNewPassword', { token, email, pass });
+    return result.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export { login, register, getNewPass, setNewPass };
