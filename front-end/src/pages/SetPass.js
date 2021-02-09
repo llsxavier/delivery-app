@@ -11,19 +11,33 @@ const SetPass = () => {
   const [passConfirmation, setPassConfirmation] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [cssRule, setCssRule] = useState('false');
+
+  const fieldset = document.querySelector('fieldset');
+  const span = document.createElement('span');
+  span.setAttribute('data-testid', 'errorPass');
+
   useEffect(() => {
     if (!pass || !passConfirmation) {
       setDisabled(true);
       setCssRule('false');
+    } else if (pass !== passConfirmation) {
+      setDisabled(true);
+      setCssRule('false');
+      if (document.querySelector('span')) {
+        document.querySelector('span').remove();
+      }
+      span.innerText = 'As senhas não são iguais!';
+      fieldset.appendChild(span);
     } else {
       setDisabled(false);
       setCssRule('true');
+      if (document.querySelector('span')) {
+        document.querySelector('span').remove();
+      }
     }
   }, [pass, passConfirmation]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const fieldset = document.querySelector('fieldset');
-    const span = document.createElement('span');
     span.setAttribute('data-testid', 'errorMsg');
     try {
       const result = await setNewPass(token, email, pass);
