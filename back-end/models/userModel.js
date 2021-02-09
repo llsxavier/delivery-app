@@ -12,8 +12,24 @@ const searchUserByEmail = async (email) => {
         .then((results) => results.fetchOne())
         .then((results) => {
           if (!results) return null;
-          const [id, name, email, password, passwordResetToken, passwordResetExpires, role] = results;
-          return { id, name, email, password, passwordResetToken, passwordResetExpires, role };
+          const [
+            id,
+            name,
+            email,
+            password,
+            passwordResetToken,
+            passwordResetExpires,
+            role,
+          ] = results;
+          return {
+            id,
+            name,
+            email,
+            password,
+            passwordResetToken,
+            passwordResetExpires,
+            role,
+          };
         })
     )
     .catch((err) => {
@@ -53,8 +69,25 @@ const setToken = async (email, token, date) => {
     });
 };
 
+const updatePass = async (email, password) => {
+  await connection()
+    .then((db) =>
+      db
+        .getTable('users')
+        .update()
+        .set('password', password)
+        .where('email = :emailBind')
+        .bind('emailBind', email)
+        .execute()
+    )
+    .catch((err) => {
+      throw err;
+    });
+};
+
 module.exports = {
   searchUserByEmail,
   register,
   setToken,
+  updatePass,
 };

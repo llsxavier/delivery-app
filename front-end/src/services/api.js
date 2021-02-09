@@ -41,7 +41,7 @@ const getNewPass = async (email) => {
 
 const setNewPass = async (token, email, pass) => {
   try {
-    const result = await api.post('/setNewPassword', { token, email, pass });
+    const result = await api.post('/setNewPassword/:tk', { token, email, pass });
     return result.data;
   } catch (e) {
     console.log(e);
