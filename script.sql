@@ -8,8 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     password VARCHAR(20) NOT NULL,
-    passwordResetToken VARCHAR(20),
-    passwordResetExpires DATETIME,
     role VARCHAR(20) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY `email_un` (email)
@@ -47,7 +45,7 @@ CREATE TABLE IF NOT EXISTS sales_products (
 
 INSERT INTO users (id, name, email, password, role) VALUES
     ('1', 'Admin', 'admin@deliveryapp.com.br', '123456', 'administrator'),
-    ('2', 'testuser', 'user@test.com', '123456', 'client');
+    ('2', 'testuser', 'user@test.com', 'test123', 'client');
 
 INSERT INTO products (id, name, price, url_image) VALUES
 	('1','Skol Lata 250ml',2.20, 'http://localhost:3001/images/Skol Lata 350ml.jpg'),

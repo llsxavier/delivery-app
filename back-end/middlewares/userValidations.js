@@ -44,23 +44,7 @@ const validateNewUser = async (req, res, next) => {
   }
 };
 
-const userCheck = async (req, res, next) => {
-  try {
-    const { email } = req.body;
-
-    const data = await userModel.searchUserByEmail(email);
-    if (data === null) {
-      throw new Error('E-mail não registrado.');
-    }
-
-    next();
-  } catch (err) {
-    return res.status(200).json({ err: err.message });
-  }
-};
-
 module.exports = {
   validateUser,
   validateNewUser,
-  userCheck,
 };
