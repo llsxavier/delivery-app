@@ -28,24 +28,4 @@ const register = async (name, lastname, email, password, role) => {
   }
 };
 
-const getNewPass = async (email) => {
-  try {
-    const result = await api.post('/getNewPassword', {
-      email,
-    });
-    return result.data;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-const setNewPass = async (token, email, pass) => {
-  try {
-    const result = await api.post('/setNewPassword/:tk', { token, email, pass });
-    return result.data;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export { login, register, getNewPass, setNewPass };
+export { login, register };

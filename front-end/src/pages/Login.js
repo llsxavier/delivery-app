@@ -108,7 +108,8 @@ const Login = () => {
             minLength="6"
             maxLength="8"
             size="8"
-            title="A senha deve conter de seis a oito caracteres."
+            title="A senha deve conter de seis a oito caracteres.
+          "
             required
             onChange={(e) => setPass(e.target.value)}
           />
