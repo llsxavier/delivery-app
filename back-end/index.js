@@ -14,5 +14,5 @@ app.use(routes);
 const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
-  console.log(`Conectado na porta ${PORT}`);
+  console.log(`Conectado na porta ${PORT}.`);
 });
