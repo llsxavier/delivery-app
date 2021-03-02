@@ -24,6 +24,8 @@
   "homepage": "https://github.com/llsxavier/DeliveryApp#readme",
   "dependencies": {
     "@mysql/xdevapi": "^8.0.20",
+    "axios": "^0.21.1",
+    "msw": "^0.27.0",
     "mysql2": "^2.1.0"
   },
   "devDependencies": {
